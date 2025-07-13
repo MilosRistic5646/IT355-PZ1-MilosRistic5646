@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Rental</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1 th:text="${rental.id} != null ? 'Edit Rental' : 'Add Rental'"></h1>
+<form th:action="@{/rentals/save}" th:object="${rental}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label>Start Date:</label>
+    <input type="date" th:field="*{startDate}" required/><br/>
+    <label>End Date:</label>
+    <input type="date" th:field="*{endDate}" required/><br/>
+
+    <label>Car:</label>
+    <select th:field="*{car}" required>
+        <option th:each="car : ${cars}" th:value="${car}" th:text="${car.make + ' ' + car.model}">Car</option>
+    </select><br/>
+
+    <label>Customer:</label>
+    <select th:field="*{customer}" required>
+        <option th:each="customer : ${customers}" th:value="${customer}" th:text="${customer.firstName + ' ' + customer.lastName}">Customer</option>
+    </select><br/>
+
+    <label>Employee:</label>
+    <select th:field="*{employee}" required>
+        <option th:each="employee : ${employees}" th:value="${employee}" th:text="${employee.fullName}">Employee</option>
+    </select><br/>
+
+    <label>Location:</label>
+    <select th:field="*{location}" required>
+        <option th:each="location : ${locations}" th:value="${location}" th:text="${location.city}">Location</option>
+    </select><br/>
+
+    <button type="submit">Save</button>
+</form>
+<a href="/rentals">Back</a>
+</body>
+</html>

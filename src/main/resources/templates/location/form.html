@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Location</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1 th:text="${location.id} != null ? 'Edit Location' : 'Add Location'"></h1>
+<form th:action="@{/locations/save}" th:object="${location}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>City:</label>
+    <input type="text" th:field="*{city}" required/><br/>
+    <label>Address:</label>
+    <input type="text" th:field="*{address}" required/><br/>
+    <button type="submit">Save</button>
+</form>
+<a href="/locations">Back</a>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cars</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Car List</h1>
+    <div class="nav-links">
+        <a href="/cars/add">Add Car</a>
+        <a href="/">Home</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Available</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td data-label="Make" th:text="${car.make}">Make</td>
+            <td data-label="Model" th:text="${car.model}">Model</td>
+            <td data-label="Year" th:text="${car.year}">Year</td>
+            <td data-label="Available">
+                <input type="checkbox" disabled th:checked="${car.available}"/>
+            </td>
+            <td data-label="Actions">
+                <a th:href="@{'/cars/edit/' + ${car.id}}">Edit</a> |
+                <a th:href="@{'/cars/delete/' + ${car.id}}"
+                   onclick="return confirm('Are you sure you want to delete this car?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
