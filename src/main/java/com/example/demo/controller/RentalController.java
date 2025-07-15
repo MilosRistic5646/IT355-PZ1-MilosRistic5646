@@ -35,6 +35,12 @@ public class RentalController {
 
     @PostMapping("/save")
     public String saveRental(@ModelAttribute Rental rental) {
+        // popuni prave objekte po ID-evima
+        rental.setCar(carService.findById(rental.getCar().getId()));
+        rental.setCustomer(customerService.findById(rental.getCustomer().getId()));
+        rental.setEmployee(employeeService.findById(rental.getEmployee().getId()));
+        rental.setLocation(locationService.findById(rental.getLocation().getId()));
+
         rentalService.save(rental);
         return "redirect:/rentals";
     }

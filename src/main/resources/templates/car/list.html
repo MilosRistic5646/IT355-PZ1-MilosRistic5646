@@ -5,12 +5,25 @@
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
+
+<!-- === NAVBAR === -->
+<nav class="navbar">
+    <ul>
+        <li><a href="/cars">Cars</a></li>
+        <li><a href="/employees">Employees</a></li>
+        <li><a href="/rentals">Rentals</a></li>
+        <li><a href="/customers">Customers</a></li>
+        <li><a href="/locations">Locations</a></li>
+    </ul>
+</nav>
+
 <div class="container">
     <h1>Car List</h1>
+
     <div class="nav-links">
         <a href="/cars/add">Add Car</a>
-        <a href="/">Home</a>
     </div>
+
     <table>
         <thead>
         <tr>
@@ -38,5 +51,6 @@
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

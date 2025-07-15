@@ -5,8 +5,10 @@
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
+
 <div class="container">
     <h1 th:text="${car.id} != null ? 'Edit Car' : 'Add Car'"></h1>
+
     <form th:action="@{/cars/save}" th:object="${car}" method="post">
         <input type="hidden" th:field="*{id}"/>
 
@@ -22,12 +24,15 @@
         <label for="available">Available:</label>
         <input type="checkbox" id="available" th:field="*{available}"/>
 
-        <button type="submit">Save</button>
+        <div class="form-actions">
+            <button type="submit">Save</button>
+        </div>
     </form>
-    <div class="nav-links">
+
+    <div class="nav-buttons">
         <a href="/cars">Back to List</a>
-        <a href="/">Home</a>
     </div>
 </div>
+
 </body>
 </html>

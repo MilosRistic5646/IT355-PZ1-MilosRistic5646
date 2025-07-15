@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rental List</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+<nav class="navbar">
+    <ul>
+        <li><a href="/cars">Cars</a></li>
+        <li><a href="/employees">Employees</a></li>
+        <li><a href="/rentals">Rentals</a></li>
+        <li><a href="/customers">Customers</a></li>
+        <li><a href="/locations">Locations</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Rental List</h1>
+    <div class="nav-links">
+        <a href="/rentals/add">Add Rental</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Start</th>
+            <th>End</th>
+            <th>Car</th>
+            <th>Customer</th>
+            <th>Employee</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="rental : ${rentals}">
+            <td th:text="${rental.startDate}"></td>
+            <td th:text="${rental.endDate}"></td>
+            <td th:text="${rental.car.model}"></td>
+            <td th:text="${rental.customer.firstName + ' ' + rental.customer.lastName}"></td>
+            <td th:text="${rental.employee.fullName}"></td>
+            <td th:text="${rental.location.city}"></td>
+            <td>
+                <a th:href="@{'/rentals/edit/' + ${rental.id}}">Edit</a> |
+                <a th:href="@{'/rentals/delete/' + ${rental.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

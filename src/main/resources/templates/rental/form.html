@@ -2,40 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add/Edit Rental</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-<h1 th:text="${rental.id} != null ? 'Edit Rental' : 'Add Rental'"></h1>
-<form th:action="@{/rentals/save}" th:object="${rental}" method="post">
-    <input type="hidden" th:field="*{id}"/>
+<div class="container">
+    <h1 th:text="${rental.id} != null ? 'Edit Rental' : 'Add Rental'"></h1>
 
-    <label>Start Date:</label>
-    <input type="date" th:field="*{startDate}" required/><br/>
-    <label>End Date:</label>
-    <input type="date" th:field="*{endDate}" required/><br/>
+    <form th:action="@{/rentals/save}" th:object="${rental}" method="post">
+        <input type="hidden" th:field="*{id}" />
 
-    <label>Car:</label>
-    <select th:field="*{car}" required>
-        <option th:each="car : ${cars}" th:value="${car}" th:text="${car.make + ' ' + car.model}">Car</option>
-    </select><br/>
+        <label>Start Date:</label>
+        <input type="date" th:field="*{startDate}" />
 
-    <label>Customer:</label>
-    <select th:field="*{customer}" required>
-        <option th:each="customer : ${customers}" th:value="${customer}" th:text="${customer.firstName + ' ' + customer.lastName}">Customer</option>
-    </select><br/>
+        <label>End Date:</label>
+        <input type="date" th:field="*{endDate}" />
 
-    <label>Employee:</label>
-    <select th:field="*{employee}" required>
-        <option th:each="employee : ${employees}" th:value="${employee}" th:text="${employee.fullName}">Employee</option>
-    </select><br/>
+        <label>Car:</label>
+        <select th:field="*{car.id}">
+            <option th:each="c : ${cars}" th:value="${c.id}" th:text="${c.model}"></option>
+        </select>
 
-    <label>Location:</label>
-    <select th:field="*{location}" required>
-        <option th:each="location : ${locations}" th:value="${location}" th:text="${location.city}">Location</option>
-    </select><br/>
+        <label>Customer:</label>
+        <select th:field="*{customer.id}">
+            <option th:each="c : ${customers}" th:value="${c.id}" th:text="${c.firstName + ' ' + c.lastName}"></option>
+        </select>
 
-    <button type="submit">Save</button>
-</form>
-<a href="/rentals">Back</a>
+        <label>Employee:</label>
+        <select th:field="*{employee.id}">
+            <option th:each="e : ${employees}" th:value="${e.id}" th:text="${e.fullName}"></option>
+        </select>
+
+        <label>Location:</label>
+        <select th:field="*{location.id}">
+            <option th:each="l : ${locations}" th:value="${l.id}" th:text="${l.city}"></option>
+        </select>
+
+        <div class="form-actions">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+
+    <div class="nav-buttons">
+        <a href="/rentals">Back</a>
+    </div>
+</div>
 </body>
 </html>
