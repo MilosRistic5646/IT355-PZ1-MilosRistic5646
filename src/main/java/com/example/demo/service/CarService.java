@@ -7,8 +7,14 @@ import java.util.*;
 
 @Component
 public class CarService {
+    private final RentalService rentalService;
+
     private List<Car> cars = new ArrayList<>();
     private long nextId = 1;
+
+    public CarService(RentalService rentalService) {
+        this.rentalService = rentalService;
+    }
 
     public List<Car> findAll() {
         return cars;
@@ -29,6 +35,10 @@ public class CarService {
     }
 
     public void deleteById(Long id) {
-        cars.removeIf(c -> c.getId().equals(id));
+        Car car = findById(id);
+        if (car != null) {
+            rentalService.deleteByCar(car);
+            cars.removeIf(c -> c.getId().equals(id));
+        }
     }
 }

@@ -7,8 +7,14 @@ import java.util.*;
 
 @Component
 public class CustomerService {
+    private final RentalService rentalService;
+
     private List<Customer> customers = new ArrayList<>();
     private long nextId = 1;
+
+    public CustomerService(RentalService rentalService) {
+        this.rentalService = rentalService;
+    }
 
     public List<Customer> findAll() {
         return customers;
@@ -29,6 +35,12 @@ public class CustomerService {
     }
 
     public void deleteById(Long id) {
-        customers.removeIf(c -> c.getId().equals(id));
+        Customer customer = findById(id);
+        if (customer != null) {
+            // prvo obriši povezane rentale
+            rentalService.deleteByCustomer(customer);
+            // pa onda obriši customera
+            customers.removeIf(c -> c.getId().equals(id));
+        }
     }
 }

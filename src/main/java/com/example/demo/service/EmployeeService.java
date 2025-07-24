@@ -7,8 +7,14 @@ import java.util.*;
 
 @Component
 public class EmployeeService {
+    private final RentalService rentalService;
+
     private List<Employee> employees = new ArrayList<>();
     private long nextId = 1;
+
+    public EmployeeService(RentalService rentalService) {
+        this.rentalService = rentalService;
+    }
 
     public List<Employee> findAll() {
         return employees;
@@ -29,6 +35,10 @@ public class EmployeeService {
     }
 
     public void deleteById(Long id) {
-        employees.removeIf(e -> e.getId().equals(id));
+        Employee employee = findById(id);
+        if (employee != null) {
+            rentalService.deleteByEmployee(employee);
+            employees.removeIf(e -> e.getId().equals(id));
+        }
     }
 }
